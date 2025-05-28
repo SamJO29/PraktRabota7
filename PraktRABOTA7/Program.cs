@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace PraktRABOTA7
 {
-    internal class Program
-    {
-    
+   
 
-
-    }
 }
 
 
@@ -84,5 +80,65 @@ static void Main(string[] args)
     Console.WriteLine(result);
 
 }
+
+//Задача 3
+
+ 
+    class EventCreator    {
+        
+        public event Action<string> TextEvent;
+
+        
+        private string objectName;
+
+        
+        public EventCreator(string name)
+        {
+            this.objectName = name;
+        }
+
+       
+        public void RaiseEvent()
+        {
+            
+            if (TextEvent != null)
+            {
+                TextEvent(objectName);
+            }
+        }
+    }
+
+   
+    class EventReceiver
+    {
+       
+        public void ShowMessage(string message)
+        {
+            Console.WriteLine("Получено сообщение от: " + message);
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+            EventCreator sender1 = new EventCreator("Cаша");
+            EventCreator sender2 = new EventCreator("Петя");
+
+            
+            EventReceiver receiver = new EventReceiver();
+
+            
+            sender1.TextEvent += receiver.ShowMessage;
+            sender2.TextEvent += receiver.ShowMessage;
+
+            
+            sender1.RaiseEvent();
+            sender2.RaiseEvent();
+
+           
+        }
+    }
 
 */
